@@ -1,19 +1,10 @@
 "use strict";
 
-const CATEGORIES = ['Skincare & Hijab', 'Gadget & Tech', 'Home & Aesthetic', 'Fashion'];
-const STORAGE_KEY = 'curated_favourites_custom_products';
+const CATEGORIES = window.CATEGORIES || ['Skincare & Hijab', 'Gadget & Tech', 'Home & Aesthetic', 'Fashion'];
 
 const defaultProducts = window.DEFAULT_PRODUCTS || [];
 
-function loadCustom() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch (e) { return []; }
-}
-function saveCustom(list) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (e) {}
-}
-
-let customProducts = loadCustom();
-let products = [...customProducts, ...defaultProducts];
+let products = [...defaultProducts];
 let currentCategory = 'All';
 let currentSearch = '';
 let currentSort = 'default';
@@ -31,14 +22,13 @@ function safeUrl(u) {
 const rm = n => 'RM ' + Number(n).toFixed(2);
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('new-category').innerHTML = CATEGORIES.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
     renderCategories();
     renderProducts();
     lucide.createIcons();
 });
 
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeProductModal(); closeAdminModal(); }
+    if (e.key === 'Escape') closeProductModal();
 });
 
 function renderCategories() {
@@ -185,46 +175,6 @@ function closeProductModal() {
     document.getElementById('modal-content').classList.add('translate-y-4', 'sm:scale-95');
     document.body.style.overflow = '';
     setTimeout(() => modal.classList.add('hidden'), 200);
-}
-
-function openAdminModal() {
-    const modal = document.getElementById('admin-modal');
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => modal.classList.remove('opacity-0'));
-    lucide.createIcons();
-}
-
-function closeAdminModal() {
-    const modal = document.getElementById('admin-modal');
-    if (modal.classList.contains('hidden')) return;
-    modal.classList.add('opacity-0');
-    document.body.style.overflow = '';
-    setTimeout(() => {
-        modal.classList.add('hidden');
-        document.getElementById('add-product-form').reset();
-    }, 200);
-}
-
-function handleAddNewProduct(e) {
-    e.preventDefault();
-    const newProd = {
-        id: Date.now(),
-        name: document.getElementById('new-name').value.trim(),
-        category: document.getElementById('new-category').value,
-        price: parseFloat(document.getElementById('new-price').value),
-        rating: 5.0,
-        badge: "Baharu",
-        link: document.getElementById('new-link').value.trim(),
-        image: document.getElementById('new-image').value.trim(),
-        note: document.getElementById('new-note').value.trim()
-    };
-    customProducts.unshift(newProd);
-    saveCustom(customProducts);
-    products = [...customProducts, ...defaultProducts];
-    closeAdminModal();
-    renderProducts();
-    showToast('Produk baharu berjaya ditambah');
 }
 
 // Toast

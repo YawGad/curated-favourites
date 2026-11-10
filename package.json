@@ -1,0 +1,11 @@
+{
+  "name": "curated-favourites",
+  "version": "1.0.0",
+  "description": "Laman showcase Shopee affiliate (statik, tanpa build)",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx --yes serve . -l 8080",
+    "check": "node --check assets/js/app.js && node --check data/products.js && node --check assets/js/tailwind-config.js"
+  }
+}

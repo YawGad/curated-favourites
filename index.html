@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curated Favourites — Pilihan Terbaik di Shopee</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+    <meta name="description" content="Koleksi produk pilihan yang disaring dengan teliti daripada Shopee Malaysia.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="assets/js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-paper text-ink font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Toast -->
+    <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] translate-y-24 opacity-0 transition-all duration-300 bg-ink text-white pl-3 pr-5 py-3 rounded-full shadow-lift flex items-center gap-3">
+        <span class="w-6 h-6 rounded-full bg-matcha-500 flex items-center justify-center"><i data-lucide="check" class="w-3.5 h-3.5"></i></span>
+        <span id="toast-message" class="text-sm font-medium">Berjaya</span>
+    </div>
+
+    <!-- Announcement -->
+    <div class="bg-matcha-900 text-matcha-100 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-center gap-2 text-center">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-berry-400 shrink-0"></i>
+            <span>Koleksi pilihan Strawberry Matcha 2026 — setiap pembelian melalui pautan ini menyokong kerja kurasi saya.</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 nav-blur border-b border-line">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            <a href="#" class="flex items-center gap-3" aria-label="Curated Favourites">
+                <span class="w-9 h-9 rounded-xl bg-matcha-800 text-white flex items-center justify-center">
+                    <i data-lucide="leaf" class="w-[18px] h-[18px]"></i>
+                </span>
+                <span class="leading-tight">
+                    <span class="block font-display font-bold text-[15px] tracking-tight">Curated Favourites</span>
+                    <span class="block text-[11px] text-ink-mute font-medium">Shopee Affiliate Showcase</span>
+                </span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-1 text-sm font-medium text-ink-soft">
+                <a href="#products-section" class="px-3 py-2 rounded-lg hover:bg-matcha-50 hover:text-ink transition">Koleksi</a>
+                <a href="#how" class="px-3 py-2 rounded-lg hover:bg-matcha-50 hover:text-ink transition">Cara Kurasi</a>
+                <a href="#disclosure" class="px-3 py-2 rounded-lg hover:bg-matcha-50 hover:text-ink transition">Pendedahan</a>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <button onclick="openAdminModal()" class="hidden sm:inline-flex items-center gap-2 h-10 px-4 rounded-xl border border-line bg-white text-sm font-semibold hover:border-matcha-700 transition">
+                    <i data-lucide="plus" class="w-4 h-4"></i> Tambah Produk
+                </button>
+                <a href="#products-section" class="inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-matcha-800 hover:bg-matcha-900 text-white text-sm font-semibold transition">
+                    Jelajah <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-matcha-50 via-paper to-paper"></div>
+        <div class="absolute -top-24 right-0 w-[28rem] h-[28rem] rounded-full bg-berry-100/60 blur-3xl -z-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-14 sm:pt-20 sm:pb-16">
+            <div class="max-w-3xl fade-up">
+                <span class="inline-flex items-center gap-2 text-xs font-semibold text-matcha-700 bg-white border border-line rounded-full px-3 py-1.5 shadow-card">
+                    <span class="w-1.5 h-1.5 rounded-full bg-berry-500"></span> Disaring secara peribadi
+                </span>
+                <h1 class="mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.08] tracking-tight text-ink">
+                    Barangan pilihan yang <span class="text-matcha-700">berbaloi</span>,
+                    <span class="text-berry-500">dikurasi</span> untuk anda.
+                </h1>
+                <p class="mt-5 text-base sm:text-lg text-ink-soft leading-relaxed max-w-2xl">
+                    Daripada penjagaan kulit hingga gajet dan dekorasi rumah. Setiap produk dipilih berdasarkan kualiti, ulasan pembeli dan nilai sebenar, tanpa perlu menapis ribuan senarai.
+                </p>
+
+                <div class="mt-8 max-w-xl">
+                    <label for="search-input" class="sr-only">Cari produk</label>
+                    <div class="relative flex items-center bg-white border border-line rounded-2xl shadow-card focus-within:border-matcha-700 focus-within:ring-4 focus-within:ring-matcha-100 transition">
+                        <i data-lucide="search" class="w-5 h-5 text-ink-mute absolute left-4"></i>
+                        <input type="text" id="search-input" oninput="filterProducts()" placeholder="Cari produk, kategori atau kata kunci" class="w-full h-14 pl-12 pr-12 bg-transparent text-sm focus:outline-none placeholder:text-ink-mute">
+                        <button onclick="clearSearch()" id="clear-search-btn" aria-label="Kosongkan carian" class="hidden absolute right-3 w-8 h-8 rounded-lg hover:bg-matcha-50 text-ink-mute items-center justify-center">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <dl class="mt-10 grid grid-cols-3 max-w-lg gap-6">
+                    <div><dt class="text-xs text-ink-mute font-medium">Produk</dt><dd id="stat-count" class="mt-1 font-display font-bold text-2xl">0</dd></div>
+                    <div><dt class="text-xs text-ink-mute font-medium">Kategori</dt><dd id="stat-cats" class="mt-1 font-display font-bold text-2xl">4</dd></div>
+                    <div><dt class="text-xs text-ink-mute font-medium">Purata Rating</dt><dd id="stat-rating" class="mt-1 font-display font-bold text-2xl">0.0</dd></div>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust strip -->
+    <section id="how" class="border-y border-line bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <div class="flex items-start gap-3">
+                <span class="w-10 h-10 rounded-xl bg-matcha-50 text-matcha-700 flex items-center justify-center shrink-0"><i data-lucide="badge-check" class="w-5 h-5"></i></span>
+                <div><p class="text-sm font-semibold">Dipilih dengan teliti</p><p class="text-xs text-ink-soft mt-0.5">Hanya produk berating tinggi dan berulasan baik.</p></div>
+            </div>
+            <div class="flex items-start gap-3">
+                <span class="w-10 h-10 rounded-xl bg-berry-50 text-berry-600 flex items-center justify-center shrink-0"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
+                <div><p class="text-sm font-semibold">Beli terus di Shopee</p><p class="text-xs text-ink-soft mt-0.5">Pembayaran dan jaminan pembeli kekal melalui Shopee.</p></div>
+            </div>
+            <div class="flex items-start gap-3">
+                <span class="w-10 h-10 rounded-xl bg-matcha-50 text-matcha-700 flex items-center justify-center shrink-0"><i data-lucide="wallet" class="w-5 h-5"></i></span>
+                <div><p class="text-sm font-semibold">Tiada kos tambahan</p><p class="text-xs text-ink-soft mt-0.5">Harga yang anda bayar sama seperti biasa.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <main id="products-section" class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-20">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 mb-8">
+            <div>
+                <h2 class="font-display font-bold text-2xl sm:text-3xl tracking-tight">Koleksi Pilihan</h2>
+                <p id="product-count" class="text-sm text-ink-soft mt-1">Memuatkan produk...</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <label for="sort-select" class="text-xs font-medium text-ink-mute">Susun</label>
+                <select id="sort-select" onchange="sortProducts()" class="h-10 bg-white border border-line rounded-xl px-3 text-sm font-medium focus:outline-none focus:border-matcha-700">
+                    <option value="default">Pilihan Utama</option>
+                    <option value="rating">Rating Tertinggi</option>
+                    <option value="low-high">Harga: Rendah ke Tinggi</option>
+                    <option value="high-low">Harga: Tinggi ke Rendah</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="category-bar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 mb-8" role="tablist" aria-label="Kategori"></div>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6"></div>
+
+        <div id="empty-state" class="hidden text-center py-24">
+            <div class="w-14 h-14 rounded-2xl bg-matcha-50 text-matcha-700 flex items-center justify-center mx-auto"><i data-lucide="search-x" class="w-6 h-6"></i></div>
+            <h3 class="mt-5 font-display font-bold text-lg">Tiada produk ditemui</h3>
+            <p class="text-sm text-ink-soft mt-1.5 max-w-sm mx-auto">Cuba kata kunci lain atau pilih kategori yang berbeza.</p>
+            <button onclick="resetFilters()" class="mt-6 h-10 px-5 rounded-xl bg-matcha-800 hover:bg-matcha-900 text-white text-sm font-semibold transition">Reset carian</button>
+        </div>
+    </main>
+
+    <!-- Disclosure -->
+    <section id="disclosure" class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-4">
+        <div class="rounded-2xl border border-line bg-white p-5 sm:p-6 flex items-start gap-4">
+            <span class="w-10 h-10 rounded-xl bg-berry-50 text-berry-600 flex items-center justify-center shrink-0"><i data-lucide="info" class="w-5 h-5"></i></span>
+            <div>
+                <h3 class="text-sm font-semibold">Pendedahan afiliasi</h3>
+                <p class="text-sm text-ink-soft mt-1 leading-relaxed">Laman ini menggunakan pautan afiliasi Shopee. Saya mungkin menerima komisen kecil apabila anda membeli melalui pautan ini, tanpa sebarang tambahan kos kepada anda. Pendapat dan pilihan produk adalah berdasarkan penilaian sendiri.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-16 bg-matcha-900 text-matcha-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center"><i data-lucide="leaf" class="w-[18px] h-[18px]"></i></span>
+                        <span class="font-display font-bold text-white">Curated Favourites</span>
+                    </div>
+                    <p class="mt-4 text-sm text-matcha-200 leading-relaxed max-w-sm">Kurasi produk Shopee yang ringkas, jujur dan mudah dijelajah.</p>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-wider font-semibold text-matcha-200">Ikuti</p>
+                    <div class="mt-4 flex gap-2">
+                        <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><i data-lucide="camera" class="w-4 h-4"></i></a>
+                        <a href="#" aria-label="Video" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><i data-lucide="video" class="w-4 h-4"></i></a>
+                        <a href="#" aria-label="Laman web" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><i data-lucide="globe" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+                <div class="text-sm text-matcha-200 md:text-right">
+                    <p>&copy; 2026 Curated Favourites.</p>
+                    <p class="mt-1 text-xs text-matcha-200/70">Tidak berkaitan secara rasmi dengan Shopee.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-200 flex items-end sm:items-center justify-center sm:p-4 bg-ink/50 backdrop-blur-sm" onclick="if(event.target===this)closeProductModal()" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div id="modal-content" class="bg-white w-full sm:max-w-3xl max-h-[92vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-lift translate-y-4 sm:scale-95 transition-transform duration-200">
+            <div class="sticky top-0 z-10 bg-white/95 backdrop-blur px-6 py-4 border-b border-line flex items-center justify-between">
+                <span id="modal-category" class="text-xs font-semibold px-3 py-1 rounded-full bg-matcha-50 text-matcha-700"></span>
+                <button onclick="closeProductModal()" aria-label="Tutup" class="w-9 h-9 rounded-xl hover:bg-matcha-50 flex items-center justify-center text-ink-soft transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div class="p-6 sm:p-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+                    <div class="relative aspect-square rounded-2xl overflow-hidden bg-matcha-50 border border-line">
+                        <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col">
+                        <h3 id="modal-title" class="font-display font-bold text-2xl leading-snug tracking-tight"></h3>
+                        <div class="mt-3 flex items-center gap-2 text-sm">
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            <span id="modal-rating" class="font-semibold"></span>
+                            <span class="text-ink-mute">· Ulasan pembeli Shopee</span>
+                        </div>
+                        <p id="modal-price" class="mt-4 font-display font-extrabold text-3xl text-matcha-800"></p>
+                        <p id="modal-desc" class="mt-4 text-sm text-ink-soft leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <div class="mt-7 rounded-2xl bg-matcha-50 border border-matcha-100 p-5">
+                    <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-matcha-700">
+                        <i data-lucide="message-square-quote" class="w-4 h-4"></i> Nota kurator
+                    </div>
+                    <p id="modal-note" class="mt-2 text-sm text-ink leading-relaxed"></p>
+                </div>
+
+                <div class="mt-7 flex flex-col sm:flex-row gap-3">
+                    <button onclick="copyCurrentLink()" class="sm:w-1/2 h-12 inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white hover:border-matcha-700 text-sm font-semibold transition">
+                        <i data-lucide="copy" class="w-4 h-4"></i> Salin pautan
+                    </button>
+                    <a id="modal-buy-btn" href="#" target="_blank" rel="noopener noreferrer sponsored" class="sm:w-1/2 h-12 inline-flex items-center justify-center gap-2 rounded-xl bg-matcha-800 hover:bg-matcha-900 text-white text-sm font-semibold transition">
+                        Lihat di Shopee <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm" onclick="if(event.target===this)closeAdminModal()" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+        <div class="bg-white w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl shadow-lift p-6 sm:p-8">
+            <div class="flex items-center justify-between pb-5 border-b border-line">
+                <h3 id="admin-title" class="font-display font-bold text-lg">Tambah produk baharu</h3>
+                <button onclick="closeAdminModal()" aria-label="Tutup" class="w-9 h-9 rounded-xl hover:bg-matcha-50 flex items-center justify-center text-ink-soft transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+
+            <form id="add-product-form" onsubmit="handleAddNewProduct(event)" class="mt-6 space-y-4 text-sm">
+                <div>
+                    <label for="new-name" class="block font-semibold mb-1.5">Nama produk</label>
+                    <input type="text" id="new-name" required placeholder="Cth: Matcha Whisk & Ceramic Bowl Set" class="w-full h-11 px-3.5 rounded-xl bg-white border border-line focus:outline-none focus:border-matcha-700 focus:ring-4 focus:ring-matcha-100">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="new-category" class="block font-semibold mb-1.5">Kategori</label>
+                        <select id="new-category" class="w-full h-11 px-3 rounded-xl bg-white border border-line focus:outline-none focus:border-matcha-700"></select>
+                    </div>
+                    <div>
+                        <label for="new-price" class="block font-semibold mb-1.5">Harga (RM)</label>
+                        <input type="number" step="0.01" min="0" id="new-price" required placeholder="39.90" class="w-full h-11 px-3.5 rounded-xl bg-white border border-line focus:outline-none focus:border-matcha-700 focus:ring-4 focus:ring-matcha-100">
+                    </div>
+                </div>
+                <div>
+                    <label for="new-link" class="block font-semibold mb-1.5">Pautan Shopee affiliate</label>
+                    <input type="url" id="new-link" required placeholder="https://shope.ee/..." class="w-full h-11 px-3.5 rounded-xl bg-white border border-line focus:outline-none focus:border-matcha-700 focus:ring-4 focus:ring-matcha-100">
+                </div>
+                <div>
+                    <label for="new-image" class="block font-semibold mb-1.5">Pautan gambar</label>
+                    <input type="url" id="new-image" required placeholder="https://..." class="w-full h-11 px-3.5 rounded-xl bg-white border border-line focus:outline-none focus:border-matcha-700 focus:ring-4 focus:ring-matcha-100">
+                </div>
+                <div>
+                    <label for="new-note" class="block font-semibold mb-1.5">Nota kurator</label>
+                    <textarea id="new-note" rows="3" required placeholder="Kenapa anda cadangkan produk ini?" class="w-full px-3.5 py-3 rounded-xl bg-white border border-line focus:outline-none focus:border-matcha-700 focus:ring-4 focus:ring-matcha-100 resize-none"></textarea>
+                </div>
+                <div class="pt-2 flex gap-3">
+                    <button type="button" onclick="closeAdminModal()" class="w-1/2 h-11 rounded-xl border border-line font-semibold hover:bg-matcha-50 transition">Batal</button>
+                    <button type="submit" class="w-1/2 h-11 rounded-xl bg-matcha-800 hover:bg-matcha-900 text-white font-semibold transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="data/products.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
